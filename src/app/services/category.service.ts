@@ -38,8 +38,6 @@ export class CategoryService {
       getInputs.endDate
     );
 
-    console.log(params);
-
     return this._http.post<CategoryApi>(requestUrl, params).pipe(
       map((data: CategoryApi) => {
         data.data.items.forEach(function(e: any) {
