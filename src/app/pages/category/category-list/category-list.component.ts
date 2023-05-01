@@ -9,6 +9,8 @@ import { CategoryApi } from 'src/app/responses/category/category.response';
 import { DatesFilter } from '@shared/functions/actions';
 import { MatDialog } from '@angular/material/dialog';
 import { CategoryManagmentComponent } from '../category-managment/category-managment.component';
+import { DialogConfig } from '@angular/cdk/dialog';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'vex-category-list',
@@ -34,22 +36,6 @@ export class CategoryListComponent implements OnInit {
 
   ngOnInit(): void {
     this.component = componentSettings;
-  }
-
-  rowClick(e: any) {
-    let action = e.action;
-    let category = e.row;
-
-    switch (action) {
-      case 'edit':
-        this.CategoryEdit(category);
-        break;
-      case 'remove':
-        this.CategoryRemove(category);
-        break;
-    }
-
-    return false;
   }
 
   setData(data: any = null) {
@@ -105,12 +91,58 @@ export class CategoryListComponent implements OnInit {
     });
   }
 
-  CategoryEdit(row: CategoryApi) {
+  rowClick(e: any) {
+    let action = e.action;
+    let category = e.row;
 
+    switch (action) {
+      case 'edit':
+        this.CategoryEdit(category);
+        break;
+      case 'remove':
+        this.CategoryRemove(category);
+        break;
+    }
+
+    return false;
+  }
+
+  CategoryEdit(row: CategoryApi) {
+    const dialogConfig = new DialogConfig();
+    dialogConfig.data = row;
+
+    let dialogRef = this._dialog.open(CategoryManagmentComponent, {
+      data: dialogConfig,
+      disableClose: true,
+      width: '400px'
+    });
+    
+    dialogRef.afterClosed().subscribe((res) => {
+      if (res) {
+        this.formatGetInputs();
+      }
+    });
   }
 
   CategoryRemove(category: any) {
-    
+    Swal.fire({
+      title: `¿Realmente deseas eliminar la categoría ${category.name}?`,
+      text: 'Se borrará de forma permanente',
+      icon: 'warning',
+      showCancelButton: true,
+      focusCancel: true,
+      confirmButtonColor: 'rgb(210, 155, 253)',
+      cancelButtonColor: 'rgb(79, 109, 202)',
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar',
+      width: 430
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this._categoryService.CategoryRemove(category.categoryId).subscribe(() => {
+          this.formatGetInputs();
+        });
+      }
+    });
   }
 
 }

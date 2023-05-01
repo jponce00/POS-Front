@@ -5,5 +5,5 @@ export const endpoint = {
     CATEGORY_BY_ID: 'Category/',
     CATEGORY_REGISTER: 'Category/Register',
     CATEGORY_EDIT: 'Category/Edit/',
-    CATEGORY_REMOVE: 'Category/Remove'
+    CATEGORY_REMOVE: 'Category/Remove/'
 }
