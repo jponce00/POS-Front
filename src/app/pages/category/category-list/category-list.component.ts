@@ -11,6 +11,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { CategoryManagmentComponent } from '../category-managment/category-managment.component';
 import { DialogConfig } from '@angular/cdk/dialog';
 import Swal from 'sweetalert2';
+import { FiltersBox } from '@shared/models/search-options-interface';
 
 @Component({
   selector: 'vex-category-list',
@@ -44,9 +45,9 @@ export class CategoryListComponent implements OnInit {
     this.formatGetInputs();
   }
 
-  search(data: any) {
+  search(data: FiltersBox) {
     this.component.filters.numFilter = data.searchValue;
-    this.component.filters.textFilter = data.searchString;
+    this.component.filters.textFilter = data.searchData;
     this.formatGetInputs();
   }
 
