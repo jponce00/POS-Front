@@ -51,7 +51,6 @@ export class SearchBoxMultipleComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('Aqui - search-box-multiple.component');
     this.changeSelection(this.searchOptions[0]);
     this.form.controls["searchData"].valueChanges.subscribe((e) => {
       if (e.trim() == "") {
