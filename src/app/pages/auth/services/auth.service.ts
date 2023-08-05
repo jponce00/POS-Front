@@ -24,7 +24,7 @@ export class AuthService {
   }
 
   login(req: Login): Observable<ApiResponse> {
-    const requestUrl = `${env.api}${endpoint.GENERATE_TOKEN}`;
+    const requestUrl = `${env.api}${endpoint.LOGIN}`;
     return this.http.post<ApiResponse>(requestUrl, req, httpOptions).pipe(
       map((resp: ApiResponse) => {
         if (resp.isSuccess) {
@@ -35,5 +35,22 @@ export class AuthService {
         return resp;
       })
     );
+  }
+
+  loginWithGoogle(credential: string): Observable<ApiResponse> {
+    const requestUrl = `${env.api}${endpoint.LOGIN_GOOGLE}`;
+
+    return this.http
+      .post<ApiResponse>(requestUrl, JSON.stringify(credential), httpOptions)
+      .pipe(
+        map((resp: ApiResponse) => {
+          if (resp.isSuccess) {
+            localStorage.setItem("token", JSON.stringify(resp.data));
+            this.user.next(resp.data);
+          }
+
+          return resp;
+        })
+      );
   }
 }
