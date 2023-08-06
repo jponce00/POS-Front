@@ -11,7 +11,10 @@ export const endpoint = {
 
   // AUTH MODULE:
   LOGIN: "Auth/Login",
-  LOGIN_GOOGLE: "Auth/LoginWithGoogle"
+  LOGIN_GOOGLE: "Auth/LoginWithGoogle",
+
+  //PROVIDER MODULE:
+  LIST_PROVIDERS: "Provider",
 };
 
 export const httpOptions = {
