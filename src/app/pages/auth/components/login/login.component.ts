@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
       });
     }
 
-    this.authService.login(this.form.value).subscribe((resp) => {
+    this.authService.login(this.form.value, "Interno").subscribe((resp) => {
       if (resp.isSuccess) {
         this.router.navigate(["/"]);
       }
