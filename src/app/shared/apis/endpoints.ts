@@ -13,8 +13,12 @@ export const endpoint = {
   LOGIN: "Auth/Login",
   LOGIN_GOOGLE: "Auth/LoginWithGoogle",
 
-  //PROVIDER MODULE:
+  // PROVIDER MODULE:
   LIST_PROVIDERS: "Provider",
+  PROVIDER_REGISTER: "Provider/Register",
+
+  // DOCUMENTTYPE MODULE:
+  LIST_DOCUMENT_TYPES: "DocumentType",
 };
 
 export const httpOptions = {

@@ -1,12 +1,13 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { endpoint } from "@shared/apis/endpoints";
-import { BaseApiResponse } from "@shared/models/base-api-response.interface";
+import { BaseApiResponse, BaseResponse } from "@shared/models/base-api-response.interface";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { environment as env } from "src/environments/environment";
 import { ProviderResponse } from "../models/provider-response.interface";
 import { getIcon } from "@shared/functions/helpers";
+import { ProviderRequest } from "../models/provider-request.interface";
 
 @Injectable({
   providedIn: "root",
@@ -49,6 +50,16 @@ export class ProviderService {
           );
         });
 
+        return resp;
+      })
+    );
+  }
+
+  providerRegister(provider: ProviderRequest): Observable<BaseResponse> {
+    const requestUrl = `${env.api}${endpoint.PROVIDER_REGISTER}`;
+
+    return this._http.post(requestUrl, provider).pipe(
+      map((resp: BaseResponse) => {
         return resp;
       })
     );
