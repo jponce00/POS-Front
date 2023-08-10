@@ -49,13 +49,8 @@ export class CategoryService {
               break;
           }
 
-          e.icEdit = getIcon("icEdit", "Editar categoría", true, "edit");
-          e.icDelete = getIcon(
-            "icDelete",
-            "Eliminar categoría",
-            true,
-            "remove"
-          );
+          e.icEdit = getIcon("icEdit", "Editar categoría", true);
+          e.icDelete = getIcon("icDelete", "Eliminar categoría", true);
         });
 
         return data;
